@@ -97,4 +97,27 @@ document.addEventListener('DOMContentLoaded', () => {
             alert(`Wishlist:\n${wishlist.join('\n')}`);
         }
     });
+
+    // Category filtering functionality
+    const categoryButtons = document.querySelectorAll('.category .box .btn');
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const categoryName = button.closest('.box').querySelector('h3').textContent.toLowerCase();
+            products.forEach(product => {
+                const productCategory = product.querySelector('h3').textContent.toLowerCase();
+                if (
+                    (categoryName === 'vegetables' && productCategory.includes('carrot') || productCategory.includes('tomatoes')) ||
+                    (categoryName === 'vegetables' && productCategory.includes('broccoli') || productCategory.includes('tomatoes')) ||
+                    (categoryName === 'vegetables' && productCategory.includes('potatoes') || productCategory.includes('tomatoes')) ||
+                    (categoryName === 'juices' && productCategory.includes('juice')) ||
+                    (categoryName === 'fruits' && (productCategory.includes('mangoes') || productCategory.includes('banana') ||productCategory.includes('oranges')))
+                ) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        });
+    });
 });
